@@ -78,7 +78,7 @@ impl Calculator {
 
 // Exercise 4
 // Make it compile
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Default)]
 struct User {
     first: String,
     last: String,
@@ -86,7 +86,7 @@ struct User {
 }
 
 fn exercise4() {
-    let u1 = User {
+    let mut u1 = User {
         first: String::from("John"),
         last: String::from("Doe"),
         age: 22,
@@ -94,7 +94,7 @@ fn exercise4() {
 
     let _u2 = User {
         first: String::from("Mary"),
-        ..u1.clone()
+        ..std::mem::take(&mut u1)
     };
 
     println!("user: {:#?}", u1);
