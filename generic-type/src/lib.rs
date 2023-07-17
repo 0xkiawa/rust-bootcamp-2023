@@ -59,8 +59,9 @@ fn find_max<T: Ord>(collection: &[T]) -> Option<&T> {
 // Reverse the elements in a collection
 // Make it compile
 // Run tests
-fn reverse_collection<T>(collection: &mut [T]) {
+fn reverse_collection<T>(collection: &mut [T]) -> &[T] {
     collection.reverse();
+    collection
 }
 
 // Exercise 6
