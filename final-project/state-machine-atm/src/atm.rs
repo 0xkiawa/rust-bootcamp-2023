@@ -84,7 +84,13 @@ impl From<Key> for u64 {
     }
 }
 
-pub fn keys_to_number(keys: Vec<Key>) -> u64 {
+impl From<&Key> for u64 {
+    fn from(key: &Key) -> Self {
+        key.into()
+    }
+}
+
+pub fn keys_to_number(keys: &Vec<Key>) -> u64 {
     let mut number = 0;
     for key in keys {
         number = number * 10 + u64::from(key)
@@ -135,7 +141,7 @@ impl StateMachine for Atm {
                 },
             },
             (Auth::Authenticated, Action::PressKey(key)) => {
-                let withdraw_amount = keys_to_number(starting_state.keystroke_register.clone());
+                let withdraw_amount = keys_to_number(&starting_state.keystroke_register);
                 match key {
                     Key::Enter => {
                         if starting_state.cash_inside < withdraw_amount {
